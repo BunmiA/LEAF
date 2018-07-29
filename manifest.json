@@ -1,7 +1,7 @@
 {
-  "name": "Getting Started Example",
+  "name": "LEAF",
   "version": "1.2",
-  "description": "Build an Extension!",
+  "description": "A Anti distraction App",
   "permissions": ["activeTab","tabs","declarativeContent", "storage"],
   "background": {
     "scripts": ["background.js"],
@@ -11,10 +11,10 @@
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
+      "16": "images/leaf_16.png",
+      "32": "images/leaf_32.png",
+      "48": "images/leaf_48.png",
+      "128": "images/leaf_16.png"
     }
   },
   "content_scripts": [
