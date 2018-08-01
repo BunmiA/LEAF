@@ -14,7 +14,7 @@
       "16": "images/leaf_16.png",
       "32": "images/leaf_32.png",
       "48": "images/leaf_48.png",
-      "128": "images/leaf_16.png"
+      "128": "images/leaf_128.png"
     }
   },
   "content_scripts": [
@@ -26,10 +26,10 @@
     }
   ],
   "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
+    "16": "images/leaf_16.png",
+    "32": "images/leaf_32.png",
+    "48": "images/leaf_48.png",
+    "128": "images/leaf_128.png"
   },
   "manifest_version": 2
 }
