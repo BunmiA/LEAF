@@ -1,8 +1,6 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+## LEAF
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
-
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+LEAF (Leave Entertainment Alone For now) is a browser extension that helps you stay conscious of what you are consuming on websites for now it focuses on Youtube and reminds you of your primary objectives of being on the site to make your consumption on the web more deliberate and less reliant on recommendation algorithms.
 
 ---
 
