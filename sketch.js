@@ -28,7 +28,8 @@ function windowResized(windowWidth, windowHeight) {
 
 function draw() {
 
-    hasEntertainment = document.body.innerHTML.includes('Entertainment','Music');
+    var pageTextContent = document.body ? document.body.textContent || '' : '';
+    hasEntertainment = window.LEAF && window.LEAF.containsEntertainment(pageTextContent);
     clear();
     if (hasEntertainment){
         console.log("Stop",hasEntertainment );
