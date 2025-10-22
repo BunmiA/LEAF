@@ -1,7 +1,7 @@
 {
   "name": "LEAF",
   "version": "1.2",
-  "description": "A Anti distraction App",
+  "description": "An anti-distraction app",
   "permissions": ["activeTab","tabs","declarativeContent", "storage"],
   "background": {
     "scripts": ["background.js"],
@@ -21,7 +21,14 @@
     {
       "matches": ["<all_urls>"],
       "css": ["myStyles.css"],
-      "js": ["p5.js", "p5.dom.js", "p5.scribble.js","sketch.js"],
+      "js": [
+        "entertainmentDetection.js",
+        "contentScript.js",
+        "p5.js",
+        "p5.dom.js",
+        "p5.scribble.js",
+        "sketch.js"
+      ],
       "run_at": "document_idle"
     }
   ],

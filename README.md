@@ -1,6 +1,6 @@
 ## LEAF
 
-LEAF (Leave Entertainment Alone For now) is a browser extension that helps you stay conscious of what you are consuming on websites for now it focuses on Youtube and reminds you of your primary objectives of being on the site to make your consumption on the web more deliberate and less reliant on recommendation algorithms.
+LEAF (Leave Entertainment Alone For now) is a browser extension that helps you stay conscious of what you are consuming on websites. For now it focuses on YouTube and reminds you of your primary objectives for being on the site to make your consumption on the web more deliberate and less reliant on recommendation algorithms.
 
 ---
 
@@ -13,8 +13,16 @@ LEAF (Leave Entertainment Alone For now) is a browser extension that helps you s
 
 ---
 
-** Website **
+**Website**
 
 https://leaf-web.herokuapp.com/home
 
 ---
+
+## Testing
+
+Run the keyword detection unit tests with:
+
+```
+node tests/entertainmentDetection.test.js
+```

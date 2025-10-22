@@ -1,12 +1,23 @@
+console.log('LEAF Interrupt App');
 
-console.log('Bunmi Interrup App');
-// var hasEntertainment = document.body.innerHTML.toLocaleLowerCase().contains('entertainment');
+const pageTextContent = document.body ? document.body.textContent || '' : '';
 
-// includes doesnt work on explorer;
-var hasEntertainment = document.body.innerHTML.includes('Entertainment');
+// window.LEAF is the shared namespace created in entertainmentDetection.js so
+// the detection logic can be reused by the content script, popup, tests, etc.,
+// without duplicating the keyword list in each file.
+const containsEntertainment =
+  (window.LEAF && window.LEAF.containsEntertainment) ||
+  ((sourceText) => {
+    if (typeof sourceText !== 'string') {
+      return false;
+    }
 
-if (hasEntertainment){
-    console.log("Stop Bunmi");
-}else{
-    console.log("continue Bunmi");
+    const normalizedText = sourceText.toLowerCase();
+    return normalizedText.includes('entertainment') || normalizedText.includes('music');
+  });
+
+if (containsEntertainment(pageTextContent)) {
+  console.log('Stop Bunmi');
+} else {
+  console.log('Continue Bunmi');
 }
