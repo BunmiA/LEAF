@@ -31,3 +31,7 @@ test('returns false when keyword is absent', () => {
 test('returns false when input is not a string', () => {
   assert.strictEqual(containsEntertainment(null), false);
 });
+
+test('handles string objects the same as primitive strings', () => {
+  assert.strictEqual(containsEntertainment(new String('entertainment headlines')), true);
+});

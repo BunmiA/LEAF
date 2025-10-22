@@ -2,11 +2,11 @@
   const KEYWORDS = ['entertainment', 'music'];
 
   function containsEntertainment(sourceText) {
-    if (typeof sourceText !== 'string') {
+    if (typeof sourceText !== 'string' && !(sourceText instanceof String)) {
       return false;
     }
 
-    const normalizedText = sourceText.toLowerCase();
+    const normalizedText = String(sourceText).toLowerCase();
     return KEYWORDS.some((keyword) => normalizedText.includes(keyword));
   }
 
