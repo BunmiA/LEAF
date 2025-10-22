@@ -8,11 +8,11 @@ const pageTextContent = document.body ? document.body.textContent || '' : '';
 const containsEntertainment =
   (window.LEAF && window.LEAF.containsEntertainment) ||
   ((sourceText) => {
-    if (typeof sourceText !== 'string') {
+    if (typeof sourceText !== 'string' && !(sourceText instanceof String)) {
       return false;
     }
 
-    const normalizedText = sourceText.toLowerCase();
+    const normalizedText = String(sourceText).toLowerCase();
     return normalizedText.includes('entertainment') || normalizedText.includes('music');
   });
 
