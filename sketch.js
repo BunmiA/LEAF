@@ -5,10 +5,11 @@ var leaf;
 var canvas;
 var leaves = [];
 var counter = 0;
+var h = 0;
 
 
 function  setup() {
-    h = document.body.clientHeight;
+    h = document.body ? document.body.clientHeight : windowHeight;
     canvas = createCanvas(windowWidth, h);
     canvas.position(0,0);
     canvas.style('z-index','800');
@@ -22,6 +23,7 @@ function  setup() {
 }
 
 function windowResized(windowWidth, windowHeight) {
+    h = document.body ? document.body.clientHeight : windowHeight;
     resizeCanvas(windowWidth,windowHeight)
     
 }
@@ -35,10 +37,9 @@ function draw() {
         console.log("Stop",hasEntertainment );
         counter +=1;
         background(255);
-        if( (counter%50)== 0){
-
-            for (var i = 0; i < numberOfLeaves; i++){
-                leaves.push(new Leaf(100*i, 0));
+        if (leaves.length < numberOfLeaves){
+            for (var i = leaves.length; i < numberOfLeaves; i++){
+                leaves.push(new Leaf(random(windowWidth), random(-h, 0)));
             }
         }
 
@@ -54,30 +55,39 @@ function draw() {
 }
 
 function Leaf(x, y) {
-    this.translatex = x;
-    this.x = 0;
+    this.x = x;
     this.y = y;
     this.height = 25;
     this.width = 50;
-    this.triangleTopx =this.x;
-    this.triangleTopy =this.y;
-    this.triangleLeftx =this.triangleTopx  - 1 ;
-    this.triangleLefty =this.triangleTopy + this.width ;
-    this.triangleRightx =this.triangleTopx + 1;
-    this.triangleRighty =this.triangleTopy + this.width ;
-    this.angle = 0 ;
-    this.speed = 5;
+    this.triangleTopx = 0;
+    this.triangleTopy = 0;
+    this.triangleLeftx = this.triangleTopx - 1;
+    this.triangleLefty = this.triangleTopy + this.width;
+    this.triangleRightx = this.triangleTopx + 1;
+    this.triangleRighty = this.triangleTopy + this.width;
+    this.rotation = random(360);
+    this.rotationSpeed = random(-1, 1);
+    this.speed = random(1.5, 3.5);
+
+    this.resetPosition = function() {
+        this.x = random(windowWidth);
+        this.y = random(-h * 0.5, 0);
+    };
 
     this.move = function() {
-        this.angle += 1;
+        this.y += this.speed;
+        this.rotation += this.rotationSpeed;
+        if (this.y - this.height > h) {
+            this.resetPosition();
+        }
     };
 
     this.display = function() {
         push();
-        translate(this.translatex, this.angle);
-        rotate(this.angle);
+        translate(this.x, this.y);
+        rotate(this.rotation);
         fill(78,105,26);
-        ellipse(this.x, this.y, this.height,this.width);
+        ellipse(0, 0, this.height, this.width);
         fill(133,87,35);
         triangle(this.triangleLeftx,this.triangleLefty,this.triangleTopx,this.triangleTopy, this.triangleRightx,this.triangleRighty);
         pop();
