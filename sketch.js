@@ -12,7 +12,10 @@ function  setup() {
     h = document.body ? document.body.clientHeight : windowHeight;
     canvas = createCanvas(windowWidth, h);
     canvas.position(0,0);
-    canvas.style('z-index','800');
+    canvas.style('position','fixed');
+    canvas.style('top','0');
+    canvas.style('left','0');
+    canvas.style('z-index','9999');
     canvas.style('pointer-events','none');
     numberOfLeaves = round(windowWidth/(2* 50 ));
 
