@@ -6,10 +6,11 @@ var canvas;
 var leaves = [];
 var counter = 0;
 var h = 0;
+var numberOfLeaves = 0;
 
 
 function  setup() {
-    h = document.body ? document.body.clientHeight : windowHeight;
+    h = windowHeight;
     canvas = createCanvas(windowWidth, h);
     canvas.position(0,0);
     canvas.style('position','fixed');
@@ -17,6 +18,7 @@ function  setup() {
     canvas.style('left','0');
     canvas.style('z-index','9999');
     canvas.style('pointer-events','none');
+    canvas.style('background-color','transparent');
     numberOfLeaves = round(windowWidth/(2* 50 ));
 
         // leaf = new Leaf(50, 0);
@@ -26,9 +28,10 @@ function  setup() {
 }
 
 function windowResized(windowWidth, windowHeight) {
-    h = document.body ? document.body.clientHeight : windowHeight;
+    h = windowHeight;
     resizeCanvas(windowWidth,windowHeight)
-    
+    numberOfLeaves = round(windowWidth/(2* 50 ));
+
 }
 
 function draw() {
@@ -39,7 +42,6 @@ function draw() {
     if (hasEntertainment){
         console.log("Stop",hasEntertainment );
         counter +=1;
-        background(255);
         if (leaves.length < numberOfLeaves){
             for (var i = leaves.length; i < numberOfLeaves; i++){
                 leaves.push(new Leaf(random(windowWidth), random(-h, 0)));
