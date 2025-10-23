@@ -77,6 +77,7 @@ function collectPageText() {
 }
 
 let lastClassification = null;
+let lastObservedUrl = window.location.href;
 
 function evaluatePage() {
   const textContent = collectPageText();
@@ -96,6 +97,11 @@ function evaluatePage() {
 
 evaluatePage();
 
+function resetClassificationAndEvaluate() {
+  lastClassification = null;
+  evaluatePage();
+}
+
 if (isYouTube() && document.body) {
   const observer = new MutationObserver(() => {
     evaluatePage();
@@ -106,4 +112,14 @@ if (isYouTube() && document.body) {
     subtree: true,
     characterData: true,
   });
+
+  window.addEventListener('yt-navigate-finish', resetClassificationAndEvaluate);
+  window.addEventListener('yt-page-data-updated', resetClassificationAndEvaluate);
 }
+
+setInterval(() => {
+  if (lastObservedUrl !== window.location.href) {
+    lastObservedUrl = window.location.href;
+    resetClassificationAndEvaluate();
+  }
+}, 1000);
