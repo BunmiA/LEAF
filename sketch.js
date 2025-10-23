@@ -7,6 +7,9 @@ var leaves = [];
 var counter = 0;
 var h = 0;
 var numberOfLeaves = 0;
+var lastPageSignature = '';
+
+var MIN_LEAF_SPACING = 60;
 
 
 function  setup() {
@@ -34,7 +37,44 @@ function windowResized(windowWidth, windowHeight) {
 
 }
 
+function getPageSignature() {
+    return window.location.href + '::' + document.title;
+}
+
+function resetLeaves() {
+    leaves = [];
+    counter = 0;
+}
+
+function generateSpacedX(excludedLeaf) {
+    var attempts = 0;
+    var candidate = random(windowWidth);
+    while (attempts < 25) {
+        var hasConflict = leaves.some(function(existingLeaf) {
+            if (existingLeaf === excludedLeaf) {
+                return false;
+            }
+            return Math.abs(existingLeaf.x - candidate) < MIN_LEAF_SPACING;
+        });
+
+        if (!hasConflict) {
+            break;
+        }
+
+        candidate = random(windowWidth);
+        attempts += 1;
+    }
+
+    return candidate;
+}
+
 function draw() {
+
+    var currentSignature = getPageSignature();
+    if (currentSignature !== lastPageSignature) {
+        lastPageSignature = currentSignature;
+        resetLeaves();
+    }
 
     var pageTextContent = document.body ? document.body.textContent || '' : '';
     hasEntertainment = window.LEAF && window.LEAF.containsEntertainment(pageTextContent);
@@ -44,7 +84,7 @@ function draw() {
         counter +=1;
         if (leaves.length < numberOfLeaves){
             for (var i = leaves.length; i < numberOfLeaves; i++){
-                leaves.push(new Leaf(random(windowWidth), random(-h, 0)));
+                leaves.push(new Leaf(generateSpacedX(), random(-h, 0)));
             }
         }
 
@@ -54,6 +94,9 @@ function draw() {
         }
 
     }else{
+        if (leaves.length > 0){
+            resetLeaves();
+        }
         console.log("continue", hasEntertainment);
     }
 
@@ -74,8 +117,10 @@ function Leaf(x, y) {
     this.rotationSpeed = random(-1, 1);
     this.speed = random(1.5, 3.5);
 
-    this.resetPosition = function() {
-        this.x = random(windowWidth);
+    this.resetPosition = function(forceNewX) {
+        if (forceNewX) {
+            this.x = generateSpacedX(this);
+        }
         this.y = random(-h * 0.5, 0);
     };
 
@@ -83,7 +128,7 @@ function Leaf(x, y) {
         this.y += this.speed;
         this.rotation += this.rotationSpeed;
         if (this.y - this.height > h) {
-            this.resetPosition();
+            this.resetPosition(true);
         }
     };
 
